@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\product;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,29 +17,46 @@ class CartController extends Controller
         $this->middleware('auth');
     }
 
-    public function addProductToCart(Request $request) {
-//        dd(request());
+    public function addProductToCart(Request $request)
+    {
+        $userCart = Auth::user()->cart;
 
-        $productToAdd = Product::find(request('product_id'));
-
-        if(!Auth::user()->cart()) {
-            Auth::user()->cart()->create();
+        // if user doesn't have a cart, create one
+        if (!$userCart) {
+            $userCart->create();
         }
 
-        $productInCart = Auth::user()->cart()->products()->where('product_id', '=', request('product_id'))->first();
-        //->pivot->quantity;
+        $cartProduct = $userCart->products()->find(request('product_id'));
 
-        if($productInCart) {
-//            productInCart
+        if ($cartProduct) {
+
+            $productQuantity = $cartProduct->pivot->quantity;
+
+            $userCart->products()->updateExistingPivot(
+                request('product_id'),
+                ['quantity' => $productQuantity + 1]
+            );
+
+        } else {
+            $userCart->products()->attach(request('product_id'), ['quantity' => 1]);
         }
 
-        Auth::user()->cart->products()->attach($productToAdd);
     }
 
-    public function removeProductFromCart() {
+    public function removeProductFromCart()
+    {
+        Auth::user()->cart->products()->detach([request('product_id')]);
+    }
 
-        $productToAdd = Product::find(request('product_id'));
+    public function updateProductQuantity()
+    {
+        if (request('quantity') === 0) {
+            $this->removeProductFromCart();
+        }
 
-        Auth::user()->cart->products()->detach($productToAdd);
+        Auth::user()->cart->products()->updateExistingPivot(
+            request('product_id'),
+            ['quantity' => request('quantity')]
+        );
     }
 }
