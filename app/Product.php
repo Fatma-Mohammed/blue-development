@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Order;
+use App\Cart;
 
 class product extends Model
 {
@@ -18,5 +20,13 @@ class product extends Model
     public function brands()
     {
         return $this->belongsToMany(Brand::class);
+    }
+
+    public function order(){
+        return $this->belongsToMany(Order::class);
+    }
+    
+    public function cart(){
+        return $this->belongsToMany(Cart::class);
     }
 }
