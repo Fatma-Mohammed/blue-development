@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\category;
+use App\brand;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Input;
 class ProductController extends Controller
@@ -27,35 +29,45 @@ class ProductController extends Controller
     }
     public function create(){
 
-        if (Gate::allows('isAdmin')) {
+        // if (Gate::allows('isAdmin')) {
 
-            return view('products/create');
+            return view('products/create',[
+                'categories' => Category::all(),
+                'brands' => Brand::all()
+
+            ]);
     
-        } else {
+        // } else {
     
-            dd('You are not Admin');
+        //     dd('You are not Admin');
     
-        }
+        // }
 
    }
 
    public function store(Request $request)
    {
 
-    if (Gate::allows('isAdmin')) {
+    // if (Gate::allows('isAdmin')) {
 
-        Product::create([
+        $product = Product::create([
             'name' => $request->name,
             'avatar' => $request->avatar->store('avatars'),
-            'price' => $request->price
+            'price' => $request->price,
+            'SKE' => $request->SKE,
+            'stock_quantity' => $request->stock_quantity
         ]);
+
+        $product->categories()->attach(request('category'));
+        $product->brands()->attach(request('brand'));
+
         return redirect()->route("products");
 
-    } else {
+    // } else {
 
-        dd('You are not Admin');
+    //     dd('You are not Admin');
 
-    }
+    // }
         
 
    }
@@ -76,6 +88,9 @@ class ProductController extends Controller
        $product = Product::find($productId);
        return view('products/edit', [
            'product' => $product,
+           'categories' => Category::all(),
+            'brands' => Brand::all()
+
 
        ]);
    }

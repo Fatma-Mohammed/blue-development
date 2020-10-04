@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('avatar')->nullable();
             $table->float('price');
+            $table->string('SKE');
+            $table ->integer('stock_quantity');
             $table->timestamps();
         });
 
