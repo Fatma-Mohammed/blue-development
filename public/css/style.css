@@ -202,3 +202,10 @@ padding: .3rem 10px;
   background-color: #181d3b;
 
 }
+input[type=submit] {
+  background:url('../imgs/bag.png') center  no-repeat;
+  border: 0;
+  display: block;
+  height: 40px;
+  width: 50px;
+}

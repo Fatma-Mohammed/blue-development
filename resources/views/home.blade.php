@@ -50,10 +50,13 @@
         
             <div class="ratings-cart text-right">
             @if($product->stock_quantity > 0)
-                <div class="cart">
-                
-                <a href=""><img src='/imgs/bag.png'/></a>
-                </div>
+
+            <form action="{{ route('cart.add', $product->id) }}" method="post" class="cart" >
+                        @csrf
+                        <input type="hidden" value="{{$product->id}}" name="product_id">
+                        <input type="submit" value="">
+                    </form>
+
                 @else
                 <div class="cart-out">
                 <p style="margin-top:10px">out of stock<p>
@@ -69,5 +72,19 @@
   @endforeach
 </div>
 
-
+<script>
+    function addToCart(product_id) {
+        let config = {
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            responseType: 'blob'
+        };
+        // preventDefault();
+        // todo : make this url dynamic
+        axios.post('http://localhost:8090/api/cart/' + product_id, {product_id: product_id}, config).then((result)=>{
+            console.log(result.data);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+</script>
 @endsection

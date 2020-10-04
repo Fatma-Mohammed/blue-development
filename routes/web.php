@@ -27,3 +27,6 @@ Route::get('/products/{product}/edit','ProductController@edit') -> name('product
 Route::put('/products/{product}','ProductController@update') -> name('product.update');
 Route::delete('/products/{product}', 'ProductController@destroy') -> name('product.destroy');
 Route::get('/products/{product}','ProductController@show')->name('product.show');
+
+
+Route::post('cart/{product_id}', 'CartController@addProductToCart')->name('cart.add');
