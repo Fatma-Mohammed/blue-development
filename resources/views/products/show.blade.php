@@ -13,7 +13,7 @@
             <b>Name: </b>
           </span>{{$product->name}}</h5>
       </div>
-      <img src="{{ asset('storage/'.$product->avatar) }}">
+      <img src="{{ secure_asset('storage/'.$product->avatar) }}">
     </div>
   </div>
 </div>

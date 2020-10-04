@@ -24,7 +24,7 @@
 
         <a href="{{route('product.show',['product'=>$product->id])}}">
           @if($product->avatar)
-          <img src="{{ asset('storage/'.$product->avatar) }}" class="avatar">
+          <img src="{{ secure_asset('storage/'.$product->avatar) }}" class="avatar">
           @else
           <img class="avatar" src="https://www.nsenergybusiness.com/wp-content/themes/goodlife-wp-child/assets/img/no_image_available.jpg" />
 
