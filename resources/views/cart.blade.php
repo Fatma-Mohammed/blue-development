@@ -3,8 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-
-
+        
 
         <div class="container m-5">
             <table class="table table-sm">
@@ -45,6 +44,16 @@
                 </tbody>
             </table>
     <h3>Total : ${{$sum}}</h3>
+    <form class="w3-container w3-display-middle w3-card-4 " method="POST" id="payment-form"
+                          action="{{ route('payment.paypal') }}">
+                        @csrf
+                        <p>
+                            <input type="text" class="w3-text-blue" name="amount" value="{{$sum}}" hidden/>
+                        </p>
+                        <button class="btn btn-primary" type="submit">Pay with PayPal</button>
+                        </p>
+                    </form>
+
         </div>
 
 

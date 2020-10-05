@@ -38,3 +38,15 @@ Route::get('/cart', 'CartController@show')->name('cart.show');
 Route::delete('/cart/{product}', 'CartController@removeProductFromCart')->name('cart.product.destroy');
 
 Route::get('/search', 'HomeController@index')->name('search');
+
+Route::post('payment/paypal', 'PaymentController@payWithPaypal')->name('payment.paypal');
+
+Route::get('payment/paypal/status', 'PaymentController@paypalCallback')->name('paypal.payment.status');
+
+Route::get('payment/paypal/cancel', function (){
+    return redirect(route('cart.show'));
+})->name('paypal.payment.cancel');
+
+Route::get('paypal-error', function (){
+    dd('error happened while processing your payment');
+})->name('paypal-payment.error');
