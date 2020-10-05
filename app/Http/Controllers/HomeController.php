@@ -24,7 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        if(request('product')){
+            $products = Product::where([['name', 'LIKE', '%' . request('product'). '%']])->get();
+        }
+        else{
+            $products = Product::all();
+        }
+        
         return view('home',[
             'products' => $products,
 

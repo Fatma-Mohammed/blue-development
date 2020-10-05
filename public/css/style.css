@@ -17,9 +17,11 @@
   }
   
   .btn--primary {
-    background-color: var(--primary);
-    color: #242424;
-    border: 1px solid var(--primary);
+    background-color: #242424;
+    color: #fff;
+    border: 1px solid #242424;
+    border-radius: 2px;
+    width: 100px;
   }
   
   .btn--outline {
@@ -31,7 +33,7 @@
   }
   
   .btn--medium {
-    padding: 8px 20px;
+    padding: 8px 17px;
     font-size: 18px;
   }
   
@@ -201,4 +203,59 @@ padding: .3rem 10px;
 .cart > a:hover{
   background-color: #181d3b;
 
+}
+input[type=submit] {
+  background:url('../imgs/bag.png') center  no-repeat;
+  border: 0;
+  display: block;
+  height: 40px;
+  width: 50px;
+}
+
+.card{
+  padding: 50px;
+}
+
+main > .container{
+  margin-top: 50px;
+}
+
+.search-form {
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  min-width: 50rem;
+  padding: 0 10px;
+}
+
+.search-bar {
+  width: 50%;
+  border: none;
+  padding: 10px;
+  border-radius: 50px;
+  opacity: .8;
+}
+
+.search-button {
+  border: none;
+  width: 5rem;
+  padding: 10px;
+  position: relative;
+  background: none;
+  right: 80px;
+}
+
+.footer{
+  background:#212529;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.788);
+  position: relative;
+  bottom: -200px;
+  padding: 20px;
+
+}
+
+.navbar {
+ 
+  padding: 0;
 }
