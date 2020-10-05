@@ -13,7 +13,7 @@
             <b>Name: </b>
           </span>{{$product->name}}</h5>
       </div>
-      <img src="/storage/$product->avatar">
+      <img src="/storage/{{$product->avatar}}">
     </div>
   </div>
 </div>
