@@ -25,7 +25,12 @@
       </h5>
       <h5>Available in stock: {{$product->stock_quantity}}</h5>
       <div class="row">
-        <div class="col-md-10"></div>
+        <div class="col-md-2">
+        @if(Auth::user()->is_admin)
+            <a class="btn btn--primary btn--medium " href="{{route('product.edit',['product'=>$product->id])}}">Edit</a>
+            @endif
+        </div>
+        <div class="col-md-8"></div>
         <div class="col-md-2">
           <div class="ratings-cart">
             @if($product->stock_quantity > 0)
@@ -42,6 +47,8 @@
 
             </div>
             @endif
+
+
           </div>
         </div>
       </div>

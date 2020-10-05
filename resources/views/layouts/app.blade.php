@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <form method="GET" action="{{route('search')}}" class="search-form">
                                 <input type="text" class="search-bar" placeholder="Search..." name="product">
                                 <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
@@ -80,6 +80,11 @@
                                 </form>
                             </div>
                         </li>
+                            @if (Auth::user()->is_admin)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('products') }}">Products</a>
+                                </li>
+                            @endif
                         @endguest
 
                     </ul>
