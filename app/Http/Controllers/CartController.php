@@ -21,7 +21,8 @@ class CartController extends Controller
     public function show(Request $request){
 
         return view('cart',[
-            'products' => Auth::user()->cart ? Auth::user()->cart->products : []
+            'products' => Auth::user()->cart ? Auth::user()->cart->products : [],
+            'sum' => 0
         ]);
 
     }

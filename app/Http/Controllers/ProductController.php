@@ -15,6 +15,7 @@ class ProductController extends Controller
         $products = Product::all();
         return view('products.index', [
             'products' => $products,
+            
         ]);
     }
 
@@ -22,8 +23,12 @@ class ProductController extends Controller
     {
         $productId = $request->product;
         $product = Product::find($productId);
+        $categories = $product->categories;
+        $brands = $product->brands;
         return view('products.show', [
             'product' => $product,
+            'categories' => $categories,
+            'brands' => $brands
 
         ]);
     }

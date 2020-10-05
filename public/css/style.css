@@ -209,3 +209,11 @@ input[type=submit] {
   height: 40px;
   width: 50px;
 }
+
+.card{
+  padding: 50px;
+}
+
+main > .container{
+  margin-top: 50px;
+}
