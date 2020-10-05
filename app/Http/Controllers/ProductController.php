@@ -8,6 +8,7 @@ use App\category;
 use App\brand;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     public function index()
@@ -34,7 +35,7 @@ class ProductController extends Controller
     }
     public function create(){
 
-        // if (Gate::allows('isAdmin')) {
+
 
             return view('products/create',[
                 'categories' => Category::all(),
@@ -42,18 +43,27 @@ class ProductController extends Controller
 
             ]);
     
-        // } else {
-    
-        //     dd('You are not Admin');
-    
-        // }
 
    }
 
    public function store(Request $request)
    {
+    
+    
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:255',
+        'avatar' => 'required|image|max:500',
+        'price' => 'required|numeric',
+        'SKE' => 'required|numeric',
+        'stock_quantity' => 'required|numeric'
+    ]);
 
-    // if (Gate::allows('isAdmin')) {
+    if ($validator->fails()) {
+        return redirect(route('product.create'))
+                    ->withErrors($validator)
+                    ->withInput();
+    }
+
 
         $product = Product::create([
             'name' => $request->name,
@@ -67,13 +77,6 @@ class ProductController extends Controller
         $product->brands()->attach(request('brand'));
 
         return redirect()->route("products");
-
-    // } else {
-
-    //     dd('You are not Admin');
-
-    // }
-        
 
    }
 
@@ -101,8 +104,20 @@ class ProductController extends Controller
    }
    public function update(Request $request)
    {   
-    $product = $request->only(["name","avatar","price"]);
-    
+    $product = $request->only(["name","avatar","price",'SKE','stock_quantity','category','brand']);
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:255',
+        'avatar' => 'required|image|max:500',
+        'price' => 'required|numeric',
+        'SKE' => 'required|numeric',
+        'stock_quantity' => 'required|numeric'
+    ]);
+
+    if ($validator->fails()) {
+        return redirect('/products/'.$request->product.'/edit')
+                    ->withErrors($validator)
+                    ->withInput();
+    }
     if($request->avatar){
          $request->avatar->move(public_path('storage/avatars'), $request->avatar->getClientOriginalName());
          $product['avatar'] = 'avatars/' . $request->file('avatar')->getClientOriginalName();
