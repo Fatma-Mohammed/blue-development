@@ -7,7 +7,6 @@
       
         
         <div class="container m-5">
-          <a href="{{route('product.create')}}" class="btn btn-success mb-5">Create Product</a>
           <table class="table table-sm">
             <thead>
               <tr>
@@ -26,7 +25,7 @@
                 <td><a href="{{route('product.show',['product'=>$product->id])}}" class="btn btn-secondary btn-sm">view</a>
                 <td><a href="{{route('product.edit',['product'=>$product->id])}}" class="btn btn-secondary btn-sm">Edit</a></td>
                 <td>
-                  <form method="POST" action="{{route('product.destroy',['product' => $product->id])}}">
+                  <form method="POST" action="{{route('cart.product.destroy',['product' => $product->id])}}">
                     @csrf @method('delete')
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure that you want to delete this product ?')">
                       Delete </button>

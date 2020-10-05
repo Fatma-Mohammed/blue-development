@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class CartController extends Controller
 {
 
@@ -28,12 +29,13 @@ class CartController extends Controller
     public function addProductToCart(Request $request)
     {
     
+        $userCart = Auth::user()->cart;
 
         // if user doesn't have a cart, create one
-        if (!Auth::user()->cart) {
-            Auth::user()->cart()->create();
+        if (!$userCart) {
+            $userCart = Auth::user()->cart()->create();
         }
-        $userCart = Auth::user()->cart;
+        
         $cartProduct = $userCart->products()->find(request('product_id'));
         $message = '';
         if ($cartProduct) {
@@ -44,18 +46,21 @@ class CartController extends Controller
                 request('product_id'),
                 ['quantity' => $productQuantity + 1]
             );
-            $message = 'Product added to cart';
+            
+            $message = 'Increased quantity';
         } else {
             $userCart->products()->attach(request('product_id'), ['quantity' => 1]);
-            $message = 'Increased quantity';
+            $message = 'Product added to cart';
         }
         return redirect(route('home'))->with('message',$message);
 
     }
 
-    public function removeProductFromCart()
+    public function removeProductFromCart($product)
     {
-        Auth::user()->cart->products()->detach([request('product_id')]);
+        
+        Auth::user()->cart->products()->detach([$product]);
+        return redirect(route('cart.show'));
     }
 
     public function updateProductQuantity()
