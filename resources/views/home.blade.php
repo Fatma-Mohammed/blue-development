@@ -14,39 +14,43 @@
   </div>
 </div>
 
-@if(!Auth::user()->verified)
+@if(Auth::user() && !Auth::user()->email_verified_at === '')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="alert alert-info">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="alert alert-info">
+        <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
+        <div class="card-body">
+          @if (session('resent'))
+          <div class="alert alert-success" role="alert">
+            {{ __('A fresh verification link has been sent to your email address.') }}
+          </div>
+          @endif
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
-            </div>
+          {{ __('Before proceeding, please check your email for a verification link.') }}
+          {{ __('If you did not receive the email') }},
+          <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+            @csrf
+            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 @endif
 
-<div id="products" class="row">
-  
+<div class="row justify-content-center">
   @if(session('message'))
   <div class="alert alert-info">{{session('message')}}</div>
   @endif
+</div>
+
+<div id="products" class="row">
+
   @foreach($products as $product)
+
   <div class="card-container col-md-4">
     <div class="single-product-wrapper">
       <!-- Product Image -->
