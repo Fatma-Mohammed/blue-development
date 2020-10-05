@@ -40,12 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
+                    <li class="nav-item">
                             <form method="GET" action="{{route('search')}}" class="search-form">
                                 <input type="text" class="search-bar" placeholder="Search..." name="product">
                                 <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
@@ -53,6 +48,11 @@
 
                             </form>
                         </li>
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
@@ -92,6 +92,10 @@
         <main class="">
             @yield('content')
         </main>
+    </div>
+
+    <div class="footer">
+        <h5>All rights reserved&copy;</h5>
     </div>
 </body>
 
