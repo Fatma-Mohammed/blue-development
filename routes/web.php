@@ -32,3 +32,6 @@ Route::get('/products/{product}','ProductController@show')->name('product.show')
 Route::post('cart/{product_id}', 'CartController@addProductToCart')->name('cart.add');
 Route::get('/cart','CartController@show')->name('cart.show');
 Route::delete('/cart/{product}', 'CartController@removeProductFromCart') -> name('cart.product.destroy');
+
+Route::get('/search','HomeController@index')->name('search');
+

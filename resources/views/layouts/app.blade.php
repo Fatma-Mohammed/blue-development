@@ -31,6 +31,8 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src='/imgs/logo.png' class="logo" />
                 </a>
+
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -43,6 +45,14 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <form method="GET" action="{{route('search')}}" class="search-form">
+                                <input type="text" class="search-bar" placeholder="Search..." name="product">
+                                <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                                </input>
+
+                            </form>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">

@@ -217,3 +217,29 @@ input[type=submit] {
 main > .container{
   margin-top: 50px;
 }
+
+.search-form {
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  min-width: 50rem;
+  padding: 0 10px;
+}
+
+.search-bar {
+  width: 50%;
+  border: none;
+  padding: 10px;
+  border-radius: 50px;
+  opacity: .8;
+}
+
+.search-button {
+  border: none;
+  width: 5rem;
+  padding: 10px;
+  position: relative;
+  background: none;
+  right: 80px;
+}
+
