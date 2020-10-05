@@ -17,13 +17,21 @@ class CartController extends Controller
         $this->middleware('auth');
     }
 
+    public function show(Request $request){
+
+        return view('cart',[
+            'products' => Auth::user()->cart->products
+        ]);
+
+    }
+
     public function addProductToCart(Request $request)
     {
         $userCart = Auth::user()->cart;
 
         // if user doesn't have a cart, create one
         if (!$userCart) {
-            $userCart->create();
+            Auth::user()->cart()->create();
         }
 
         $cartProduct = $userCart->products()->find(request('product_id'));
@@ -40,6 +48,7 @@ class CartController extends Controller
         } else {
             $userCart->products()->attach(request('product_id'), ['quantity' => 1]);
         }
+        return redirect('home');
 
     }
 
